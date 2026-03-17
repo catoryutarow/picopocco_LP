@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>グッズ | ピコポッコ Official Website</title>
+    <!-- Google Fonts for rounded feel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./src/style.css" />
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-container">
+            <h1 class="logo">
+                <a href="index.html">
+                    <img src="/logo.png" alt="ピコポッコ" />
+                </a>
+            </h1>
+            <button class="menu-toggle" aria-label="メニューを開く">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html#news">ニュース</a></li>
+                    <li><a href="index.html#about">ピコポッコについて</a></li>
+                    <li><a href="index.html#member">メンバー紹介</a></li>
+                    <li><a href="blog.html">ブログ</a></li>
+                    <li><a href="goods.html">グッズ</a></li>
+                    <li><a href="index.html#contact">お問い合わせ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h2 class="section-title">グッズ</h2>
+            </div>
+        </section>
+
+        <section class="section-goods-list">
+            <div class="container section-container">
+                <div class="goods-grid">
+                    <!-- Goods Item 1 -->
+                    <div class="goods-item">
+                        <div class="goods-image placeholder-image">商品画像</div>
+                        <div class="goods-info">
+                            <h3 class="goods-name">ピコポッコTシャツ</h3>
+                            <p class="goods-price">¥2,500</p>
+                            <p class="goods-desc">カラフルなロゴが入ったオリジナルTシャツ。キッズサイズもあります！</p>
+                            <a href="#" class="btn btn-buy">購入する</a>
+                        </div>
+                    </div>
+                    <!-- Goods Item 2 -->
+                    <div class="goods-item">
+                        <div class="goods-image placeholder-image">商品画像</div>
+                        <div class="goods-info">
+                            <h3 class="goods-name">トートバッグ</h3>
+                            <p class="goods-price">¥1,800</p>
+                            <p class="goods-desc">お買い物やレッスンバッグにぴったり。丈夫なキャンバス生地です。</p>
+                            <a href="#" class="btn btn-buy">購入する</a>
+                        </div>
+                    </div>
+                    <!-- Goods Item 3 -->
+                    <div class="goods-item">
+                        <div class="goods-image placeholder-image">商品画像</div>
+                        <div class="goods-info">
+                            <h3 class="goods-name">缶バッジセット</h3>
+                            <p class="goods-price">¥500</p>
+                            <p class="goods-desc">メンバーのイラストが描かれた缶バッジ3個セット。</p>
+                            <a href="#" class="btn btn-buy">購入する</a>
+                        </div>
+                    </div>
+                    <!-- Goods Item 4 -->
+                    <div class="goods-item">
+                        <div class="goods-image placeholder-image">商品画像</div>
+                        <div class="goods-info">
+                            <h3 class="goods-name">マフラータオル</h3>
+                            <p class="goods-price">¥1,500</p>
+                            <p class="goods-desc">ライブの必需品！一緒に回して盛り上がろう！</p>
+                            <a href="#" class="btn btn-buy">購入する</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p class="copyright">&copy; 2024 Pico Pocco. All Rights Reserved.</p>
+            <div class="scroll-top" id="scrollTop">
+                ↑ ページトップへ
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="./src/main.js"></script>
+</body>
+
+</html>

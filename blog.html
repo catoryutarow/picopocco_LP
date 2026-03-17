@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ブログ | ピコポッコ Official Website</title>
+    <!-- Google Fonts for rounded feel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./src/style.css" />
+</head>
+
+<body>
+    <!-- Mobile Fixed Menu Button + Nav -->
+    <button class="mobile-menu-btn" aria-label="メニューを開く">メニュー</button>
+    <nav class="mobile-nav">
+      <ul>
+        <li><a href="index.html">トップ</a></li>
+        <li><a href="index.html#news">ニュース</a></li>
+        <li><a href="index.html#about">ピコポッコについて</a></li>
+        <li><a href="index.html#member">メンバー紹介</a></li>
+        <li><a href="blog.html">ブログ</a></li>
+        <li><a href="https://formbase.jp/motechoro/contact-form" target="_blank" rel="noopener noreferrer">お問い合わせ</a></li>
+      </ul>
+    </nav>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-container">
+            <h1 class="logo">
+                <a href="index.html">
+                    <img src="/logo.png" alt="ピコポッコ" />
+                </a>
+            </h1>
+            <button class="menu-toggle" aria-label="メニューを開く">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html#news">ニュース</a></li>
+                    <li><a href="index.html#about">ピコポッコについて</a></li>
+                    <li><a href="index.html#member">メンバー紹介</a></li>
+                    <li><a href="blog.html">ブログ</a></li>
+                    <li><a href="index.html#contact">お問い合わせ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h2 class="section-title">ブログ</h2>
+            </div>
+        </section>
+
+        <section class="section-blog-list">
+            <div class="container section-container">
+                <div class="blog-grid">
+                    <!-- Blog Post 1 -->
+                    <article class="blog-card">
+                        <div class="blog-thumbnail placeholder-image">サムネイル</div>
+                        <div class="blog-content">
+                            <span class="blog-date">2024.05.05</span>
+                            <h3 class="blog-title">こどもの日コンサート、ありがとうございました！</h3>
+                            <p class="blog-excerpt">昨日はたくさんの子供たちに来てくれて本当に嬉しかったです！みんなの笑顔が輝いていました...</p>
+                            <a href="#" class="read-more">もっと読む</a>
+                        </div>
+                    </article>
+                    <!-- Blog Post 2 -->
+                    <article class="blog-card">
+                        <div class="blog-thumbnail placeholder-image">サムネイル</div>
+                        <div class="blog-content">
+                            <span class="blog-date">2024.04.28</span>
+                            <h3 class="blog-title">練習風景をちょっとだけ公開</h3>
+                            <p class="blog-excerpt">次のライブに向けて猛特訓中！新しい振り付けも考えました。楽しみにしていてね...</p>
+                            <a href="#" class="read-more">もっと読む</a>
+                        </div>
+                    </article>
+                    <!-- Blog Post 3 -->
+                    <article class="blog-card">
+                        <div class="blog-thumbnail placeholder-image">サムネイル</div>
+                        <div class="blog-content">
+                            <span class="blog-date">2024.04.10</span>
+                            <h3 class="blog-title">春ですね！</h3>
+                            <p class="blog-excerpt">暖かくなってきましたね。ピコポッコのみんなでお花見に行きました！...</p>
+                            <a href="#" class="read-more">もっと読む</a>
+                        </div>
+                    </article>
+                    <!-- Blog Post 4 -->
+                    <article class="blog-card">
+                        <div class="blog-thumbnail placeholder-image">サムネイル</div>
+                        <div class="blog-content">
+                            <span class="blog-date">2024.03.15</span>
+                            <h3 class="blog-title">はじめまして、ピコポッコです</h3>
+                            <p class="blog-excerpt">この度、公式ブログをスタートしました。日々の活動や裏話をお届けしていきます...</p>
+                            <a href="#" class="read-more">もっと読む</a>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="pagination">
+                    <span class="page-number active">1</span>
+                    <a href="#" class="page-number">2</a>
+                    <a href="#" class="page-number">3</a>
+                    <a href="#" class="page-next">次へ &gt;</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p class="copyright">&copy; 2024 Pico Pocco. All Rights Reserved.</p>
+            <div class="scroll-top" id="scrollTop">
+                ↑ ページトップへ
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="./src/main.js"></script>
+</body>
+
+</html>

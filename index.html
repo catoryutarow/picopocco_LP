@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ピコポッコ Official Website</title>
+  <!-- Google Fonts for rounded feel -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./src/style.css" />
+</head>
+
+<body>
+
+  <!-- SVG Mask Definition: background with shape hole to reveal MV -->
+  <svg width="0" height="0" style="position:absolute">
+    <defs>
+      <mask id="mv-hole" maskContentUnits="objectBoundingBox">
+        <!-- White = background visible -->
+        <rect width="1" height="1" fill="white"/>
+        <!-- Black = hole where MV shows through -->
+        <path transform="scale(0.001049, 0.001118)" fill="black"
+              d="M232.22,894.28c-34.77,0-60.39-5.13-80.64-16.13-39.51-21.48-71.89-56.05-96.26-102.76-19.92-38.19-34.67-84.76-43.82-138.42-7.34-43.01-14.8-113.58-8.72-205.53,2.9-43.85,7.29-110.12,27.33-177,23.85-79.58,64.74-142.02,121.54-185.57,37.18-28.52,77.24-46.61,126.06-56.94C325.13,1.88,375.9.5,423.71.5c17.26,0,34.77.2,53.3.41,145.55,1.67,310.51,3.57,406.31,119.72,33.25,40.31,53.86,89.19,63.01,149.45,8.08,53.2,6.48,108.16,4.93,161.3-2.96,101.61-6.32,216.77-84.13,304.29-28.83,32.43-70.63,55.37-135.54,74.37-60.71,17.77-136.7,31.44-254.65,51.85-116.05,20.08-189.96,32.39-244.71,32.39Z"/>
+      </mask>
+      <!-- Frayed fabric edge filter -->
+      <filter id="frayed">
+        <feTurbulence type="fractalNoise" baseFrequency="0.15" numOctaves="3" seed="2"/>
+        <feDisplacementMap in="SourceGraphic" scale="6" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- ========== LAYER 0: MV (Fixed Background) ========== -->
+  <div class="mv-background">
+    <div class="mv-background__visual">
+      <video class="mv-video mv-video--pc" autoplay muted loop playsinline>
+        <source src="/mv.mp4" type="video/mp4">
+      </video>
+      <video class="mv-video mv-video--sp" autoplay muted loop playsinline>
+        <source src="/mv_sp.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+
+  <!-- ========== LAYER 1: Scrollable Content ========== -->
+  <div class="site-content">
+
+    <!-- Sticky SNS Icons -->
+    <div class="sticky-sns-icons">
+      <a href="https://x.com/pico_pocco_" target="_blank" rel="noopener noreferrer" class="sns-icon"
+        aria-label="X (Twitter)">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+        </svg>
+      </a>
+      <a href="https://www.instagram.com/pico_pocco/" target="_blank" rel="noopener noreferrer" class="sns-icon"
+        aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+        </svg>
+      </a>
+      <a href="https://www.youtube.com/@picopocco" target="_blank" rel="noopener noreferrer" class="sns-icon"
+        aria-label="YouTube">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+        </svg>
+      </a>
+      <a href="https://www.tiktok.com/@pico_pocco?lang=ja-JP" target="_blank" rel="noopener noreferrer" class="sns-icon"
+        aria-label="TikTok">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
+        </svg>
+      </a>
+    </div>
+
+    <!-- Header -->
+    <header class="site-header">
+      <div class="container header-container">
+        <h1 class="logo">
+          <a href="#">
+            <img src="/logo.png" alt="ピコポッコ" />
+          </a>
+        </h1>
+        <button class="menu-toggle" aria-label="メニューを開く">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+        <nav class="main-nav">
+          <ul>
+            <li><a href="index.html#news">ニュース</a></li>
+            <li><a href="index.html#about">ピコポッコについて</a></li>
+            <li><a href="index.html#member">メンバー紹介</a></li>
+            <li><a href="blog.html">ブログ</a></li>
+            <li><a href="https://formbase.jp/motechoro/contact-form" target="_blank" rel="noopener noreferrer">お問い合わせ</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Mobile Fixed Menu Button + Nav -->
+    <button class="mobile-menu-btn" aria-label="メニューを開く">メニュー</button>
+    <nav class="mobile-nav">
+      <ul>
+        <li><a href="index.html#news">ニュース</a></li>
+        <li><a href="index.html#about">ピコポッコについて</a></li>
+        <li><a href="index.html#member">メンバー紹介</a></li>
+        <li><a href="blog.html">ブログ</a></li>
+        <li><a href="https://formbase.jp/motechoro/contact-form" target="_blank" rel="noopener noreferrer">お問い合わせ</a></li>
+      </ul>
+    </nav>
+
+    <!-- Hero Logo (outside spacer to avoid mask clipping) -->
+    <img src="/logo_white.png" alt="ピコポッコ" class="hero-logo">
+
+    <!-- Hero Spacer: transparent area where MV shows through -->
+    <section id="hero" class="hero-spacer">
+      <div class="hero-spacer__actions">
+        <a href="https://youtu.be/bFV9zNX-dOQ" target="_blank" rel="noopener noreferrer" class="hero-mv-btn">
+          ミュージックビデオ
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M8 5v14l11-7z"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== Site Body: background layer that covers the MV on scroll ===== -->
+    <div class="site-body">
+
+      <!-- Carousel -->
+      <section class="section-carousel">
+        <div class="container section-container">
+          <div class="carousel">
+            <div class="carousel-track">
+              <div class="slide" style="padding: 0; background-color: transparent;">
+                <img src="/picopocco/1.jpg" alt="ピコポッコ メインビジュアル1" style="width: 100%; height: 100%; object-fit: cover;">
+              </div>
+              <div class="slide" style="padding: 0; background-color: transparent;">
+                <img src="/picopocco/2.jpg" alt="ピコポッコ メインビジュアル2" style="width: 100%; height: 100%; object-fit: cover;">
+              </div>
+              <div class="slide" style="padding: 0; background-color: transparent;">
+                <img src="/picopocco/3.jpg" alt="ピコポッコ メインビジュアル3" style="width: 100%; height: 100%; object-fit: cover;">
+              </div>
+            </div>
+            <button class="carousel-arrow carousel-arrow--prev" aria-label="前へ">&#10094;</button>
+            <button class="carousel-arrow carousel-arrow--next" aria-label="次へ">&#10095;</button>
+            <div class="carousel-dots"></div>
+          </div>
+        </div>
+      </section>
+
+      <main>
+    <!-- Featured Video Section -->
+    <section id="featured-video" class="section-video">
+      <div class="container section-container" style="text-align: center;">
+        <h2 class="section-title">YouTube</h2>
+        <a href="https://youtu.be/bFV9zNX-dOQ?si=3J2S7V3HaDJVug8G" target="_blank" rel="noopener noreferrer"
+          style="display: block; max-width: 800px; margin: 0 auto; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: transform 0.2s;"
+          onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+          <img src="https://img.youtube.com/vi/bFV9zNX-dOQ/maxresdefault.jpg" alt="YouTube動画を見る"
+            style="width: 100%; display: block;"
+            onerror="this.src='https://img.youtube.com/vi/bFV9zNX-dOQ/hqdefault.jpg'">
+        </a>
+      </div>
+    </section>
+
+    <!-- News Section -->
+    <section id="news" class="section-news">
+      <div class="container section-container">
+        <h2 class="section-title">ニュース</h2>
+        <ul class="news-list">
+          <li>
+            <span class="news-date">2024.05.05</span>
+            <span class="news-category category-event">イベント</span>
+            <a href="blog.html" class="news-title">こどもの日コンサート、ありがとうございました！</a>
+          </li>
+          <li>
+            <span class="news-date">2024.04.28</span>
+            <span class="news-category category-video">動画</span>
+            <a href="blog.html" class="news-title">練習風景をちょっとだけ公開</a>
+          </li>
+          <li>
+            <span class="news-date">2024.04.10</span>
+            <span class="news-category category-info">お知らせ</span>
+            <a href="blog.html" class="news-title">春ですね！</a>
+          </li>
+          <li>
+            <span class="news-date">2024.03.15</span>
+            <span class="news-category category-info">お知らせ</span>
+            <a href="blog.html" class="news-title">はじめまして、ピコポッコです</a>
+          </li>
+        </ul>
+        <div class="more-link">
+          <a href="blog.html" class="btn btn-primary">ニュース一覧へ</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section-about">
+      <div class="container section-container">
+        <h2 class="section-title">ピコポッコについて</h2>
+        <div class="about-content">
+          <div class="about-image">
+            <img src="/about-image.jpg" alt="ピコポッコのメンバー写真"
+              style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;" />
+          </div>
+          <div class="about-text">
+            <h3>ピコポッコって？</h3>
+            <p>
+              「ライオンがいる!? リトミックバンド」ピコポッコです！<br><br>
+              じっと座って聴くスタイルはおしまい。私たちの音楽は、子どもたちが主役！生演奏のリズムに合わせて、歌って、踊って、心と体をフルに使って遊びましょう。<br>
+              「社会を健康で楽しく！」を合言葉に、子どもたちの感性をキラキラ育てるハッピーな時間をお届けします！
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Member Section -->
+    <section id="member" class="section-member">
+      <div class="container section-container">
+        <h2 class="section-title">メンバー紹介</h2>
+        <div class="member-grid">
+          <!-- Members -->
+          <div class="member-card">
+            <div class="member-photo" style="overflow: hidden; padding: 0;">
+              <img src="/改訂版/member_1.jpg" alt="ロム"
+                style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+            </div>
+            <h3 class="member-name">ライオンのロム</h3>
+            <p class="member-role">口笛</p>
+          </div>
+          <div class="member-card">
+            <div class="member-photo" style="overflow: hidden; padding: 0;">
+              <img src="/改訂版/member_2.jpg" alt="せいか"
+                style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+            </div>
+            <h3 class="member-name">せいか</h3>
+            <p class="member-role">ボーカル</p>
+          </div>
+          <div class="member-card">
+            <div class="member-photo" style="overflow: hidden; padding: 0;">
+              <img src="/改訂版/member_3.jpg" alt="まさと"
+                style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+            </div>
+            <h3 class="member-name">まさと</h3>
+            <p class="member-role">ギター</p>
+          </div>
+          <div class="member-card">
+            <div class="member-photo" style="overflow: hidden; padding: 0;">
+              <img src="/改訂版/member_4.jpg" alt="りゅうたろう"
+                style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+            </div>
+            <h3 class="member-name">りゅうたろう</h3>
+            <p class="member-role">キーボード</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-contact">
+      <div class="container section-container">
+        <h2 class="section-title">お問い合わせ</h2>
+        <p>出演依頼・お問い合わせはこちらから</p>
+        <a href="https://formbase.jp/motechoro/contact-form" target="_blank" rel="noopener noreferrer"
+          class="btn btn-secondary">お問い合わせ</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="copyright">&copy; 2024 Pico Pocco. All Rights Reserved.</p>
+      <div class="scroll-top" id="scrollTop">
+        ↑ ページトップへ
+      </div>
+    </div>
+  </footer>
+
+    </div><!-- /.site-body -->
+  </div><!-- /.site-content -->
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+
+</html>
