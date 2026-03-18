@@ -1,15 +1,40 @@
 // Loading Overlay
-window.addEventListener('load', () => {
-  const overlay = document.getElementById('loading-overlay')
-  if (overlay) {
-    overlay.classList.add('fade-out')
-    document.body.classList.remove('is-loading')
-    document.body.classList.add('is-loaded')
-    overlay.addEventListener('transitionend', () => {
-      overlay.remove()
-    })
+;(() => {
+  let dismissed = false
+
+  function dismissLoading() {
+    if (dismissed) return
+    dismissed = true
+    const overlay = document.getElementById('loading-overlay')
+    if (overlay) {
+      overlay.classList.add('fade-out')
+      document.body.classList.remove('is-loading')
+      document.body.classList.add('is-loaded')
+      overlay.addEventListener('transitionend', () => overlay.remove())
+    }
   }
-})
+
+  // Wait for images only (not videos), then dismiss
+  document.addEventListener('DOMContentLoaded', () => {
+    const images = Array.from(document.images)
+    if (images.length === 0) {
+      dismissLoading()
+      return
+    }
+    let loaded = 0
+    const check = () => { if (++loaded >= images.length) dismissLoading() }
+    images.forEach(img => {
+      if (img.complete) { check() }
+      else {
+        img.addEventListener('load', check)
+        img.addEventListener('error', check)
+      }
+    })
+  })
+
+  // Fallback: dismiss after 5 seconds no matter what
+  setTimeout(dismissLoading, 5000)
+})()
 
 // Mobile Menu Toggle
 document.addEventListener('DOMContentLoaded', () => {
