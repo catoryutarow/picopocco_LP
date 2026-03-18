@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>管理画面 | ピコポッコ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.snow.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./src/style.css" />
+    <link rel="stylesheet" href="./src/admin.css" />
+</head>
+
+<body class="admin-body">
+
+    <!-- ===== Login View ===== -->
+    <div id="login-view" class="admin-view">
+        <div class="login-card">
+            <h1 class="login-title">ピコポッコ管理画面</h1>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="email">メールアドレス</label>
+                    <input type="email" id="email" required autocomplete="email" />
+                </div>
+                <div class="form-group">
+                    <label for="password">パスワード</label>
+                    <input type="password" id="password" required autocomplete="current-password" />
+                </div>
+                <p id="login-error" class="error-msg"></p>
+                <button type="submit" class="btn btn-primary btn-block">ログイン</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ===== Dashboard View ===== -->
+    <div id="dashboard-view" class="admin-view" style="display:none;">
+        <header class="admin-header">
+            <h1>ピコポッコ管理画面</h1>
+            <div class="admin-header-actions">
+                <span id="user-email" class="user-email"></span>
+                <button id="logout-btn" class="btn btn-small">ログアウト</button>
+            </div>
+        </header>
+        <main class="admin-main">
+            <div class="admin-toolbar">
+                <h2>記事一覧</h2>
+                <button id="new-post-btn" class="btn btn-primary">新しい記事を書く</button>
+            </div>
+            <div id="posts-table-container">
+                <table class="posts-table">
+                    <thead>
+                        <tr>
+                            <th style="width:60px;"></th>
+                            <th>タイトル</th>
+                            <th style="width:100px;">カテゴリ</th>
+                            <th style="width:110px;">日付</th>
+                            <th style="width:80px;">状態</th>
+                            <th style="width:80px;">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="posts-tbody"></tbody>
+                </table>
+            </div>
+            <p id="no-posts-admin" style="text-align:center;color:#888;display:none;">記事がありません。「新しい記事を書く」から作成してください。</p>
+        </main>
+    </div>
+
+    <!-- ===== Editor View ===== -->
+    <div id="editor-view" class="admin-view" style="display:none;">
+        <header class="admin-header">
+            <button id="back-to-list" class="btn btn-small">← 記事一覧へ</button>
+            <div class="admin-header-actions">
+                <span id="autosave-status" class="autosave-status"></span>
+            </div>
+        </header>
+        <main class="admin-main editor-main">
+            <div class="editor-form">
+                <div class="form-group">
+                    <label for="post-title">タイトル</label>
+                    <input type="text" id="post-title" placeholder="記事のタイトルを入力" />
+                </div>
+                <div class="form-row">
+                    <div class="form-group" style="flex:1;">
+                        <label for="post-category">カテゴリ</label>
+                        <select id="post-category">
+                            <option value="">選択してください</option>
+                            <option value="イベント">イベント</option>
+                            <option value="動画">動画</option>
+                            <option value="お知らせ">お知らせ</option>
+                            <option value="日記">日記</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label for="post-status">状態</label>
+                        <select id="post-status">
+                            <option value="draft">下書き</option>
+                            <option value="published">公開</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>サムネイル画像</label>
+                    <div class="thumbnail-upload">
+                        <div id="thumbnail-preview" class="thumbnail-preview">
+                            <span>クリックして画像を選択</span>
+                        </div>
+                        <input type="file" id="thumbnail-input" accept="image/*" style="display:none;" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="post-excerpt">抜粋（一覧に表示される短い説明）</label>
+                    <textarea id="post-excerpt" rows="2" placeholder="記事の概要を入力..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>本文</label>
+                    <div id="quill-editor"></div>
+                </div>
+                <div class="editor-actions">
+                    <button id="save-post-btn" class="btn btn-primary">保存する</button>
+                    <button id="delete-post-btn" class="btn btn-danger" style="display:none;">削除する</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.js"></script>
+    <script type="module" src="./src/admin.js"></script>
+</body>
+
+</html>
