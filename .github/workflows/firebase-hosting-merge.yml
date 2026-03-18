@@ -16,6 +16,6 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
-      - run: npx firebase deploy --only hosting --token "$FIREBASE_TOKEN"
+      - run: npx firebase deploy --only hosting --project picopocco-blog --token "$FIREBASE_TOKEN"
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
