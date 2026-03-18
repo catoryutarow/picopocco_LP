@@ -7,7 +7,13 @@
     dismissed = true
     const overlay = document.getElementById('loading-overlay')
     if (overlay) {
-      window.scrollTo(0, 0)
+      const hash = window.location.hash
+      const target = hash ? document.querySelector(hash) : null
+      if (target) {
+        target.scrollIntoView()
+      } else {
+        window.scrollTo(0, 0)
+      }
       overlay.classList.add('fade-out')
       document.body.classList.remove('is-loading')
       overlay.addEventListener('transitionend', () => overlay.remove())
