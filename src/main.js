@@ -48,6 +48,18 @@
   setTimeout(dismissLoading, 15000)
 })()
 
+// Resume videos when page becomes visible again (mobile Chrome tab restore)
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    document.querySelectorAll('video[autoplay]').forEach(v => v.play().catch(() => {}))
+  }
+})
+window.addEventListener('pageshow', (e) => {
+  if (e.persisted) {
+    document.querySelectorAll('video[autoplay]').forEach(v => v.play().catch(() => {}))
+  }
+})
+
 // Mobile Menu Toggle
 document.addEventListener('DOMContentLoaded', () => {
   // Desktop hamburger
