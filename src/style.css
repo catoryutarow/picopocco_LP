@@ -52,13 +52,8 @@
   letter-spacing: 0.2em;
 }
 
-body.is-loading > *:not(.loading-overlay) {
-  opacity: 0;
-}
-
-body.is-loaded > *:not(.loading-overlay) {
-  opacity: 1;
-  transition: opacity 0.3s ease;
+body.is-loading {
+  overflow: hidden;
 }
 
 * {
