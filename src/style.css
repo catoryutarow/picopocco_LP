@@ -221,7 +221,7 @@ img {
 .site-body {
   position: relative;
   background-color: var(--color-background-body);
-  background-image: url('/picopocco_bg6.png');
+  background-image: url('/picopocco_bg6.jpg');
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
@@ -234,7 +234,7 @@ img {
   height: 100vh;
   height: 100svh;
   background-color: var(--color-background-body);
-  background-image: url('/picopocco_bg6.png');
+  background-image: url('/picopocco_bg6.jpg');
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
@@ -708,7 +708,7 @@ section {
   }
 
   .site-body {
-    background-image: url('/picopocco_bg6.png');
+    background-image: url('/picopocco_bg6.jpg');
     background-size: 100% auto;
     background-repeat: repeat-y;
     background-attachment: scroll;
@@ -722,7 +722,7 @@ section {
     left: -3px;
     right: -3px;
     height: 6px;
-    background-image: url('/picopocco_bg6.png');
+    background-image: url('/picopocco_bg6.jpg');
     background-size: 100% auto;
     background-position: center top;
     filter: url(#frayed);
