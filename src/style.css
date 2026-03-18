@@ -651,6 +651,22 @@ section {
   margin-top: 30px;
 }
 
+.footer-company {
+  margin-bottom: 15px;
+}
+
+.footer-label {
+  font-size: 0.75rem;
+  color: #aaa;
+  margin-bottom: 4px;
+}
+
+.footer-company-link {
+  font-size: 0.9rem;
+  color: var(--color-accent-blue);
+  font-weight: bold;
+}
+
 .copyright {
   font-size: 0.8rem;
   color: #888;
