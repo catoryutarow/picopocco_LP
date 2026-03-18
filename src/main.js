@@ -1,3 +1,16 @@
+// Loading Overlay
+window.addEventListener('load', () => {
+  const overlay = document.getElementById('loading-overlay')
+  if (overlay) {
+    overlay.classList.add('fade-out')
+    document.body.classList.remove('is-loading')
+    document.body.classList.add('is-loaded')
+    overlay.addEventListener('transitionend', () => {
+      overlay.remove()
+    })
+  }
+})
+
 // Mobile Menu Toggle
 document.addEventListener('DOMContentLoaded', () => {
   // Desktop hamburger
