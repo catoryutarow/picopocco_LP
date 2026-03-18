@@ -538,6 +538,82 @@ section {
   font-size: 0.9rem;
 }
 
+/* Price Section */
+.section-price {
+  text-align: center;
+}
+
+.price-table {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.price-card {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  padding: 0 30px 30px;
+  max-width: 380px;
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+}
+
+.price-card-header {
+  background: var(--color-secondary);
+  margin: 0 -30px 25px;
+  padding: 25px 30px;
+  color: #fff;
+}
+
+.price-plan-name {
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+}
+
+.price-amount {
+  font-size: 2.8rem;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+.price-yen {
+  font-size: 1.5rem;
+  vertical-align: top;
+  margin-right: 2px;
+}
+
+.price-suffix {
+  font-size: 1.5rem;
+}
+
+.price-features {
+  list-style: none;
+  text-align: left;
+  margin-bottom: 25px;
+}
+
+.price-features li {
+  padding: 10px 0;
+  border-bottom: 1px dashed #eee;
+  font-size: 0.95rem;
+  color: var(--color-text);
+}
+
+.price-features li::before {
+  content: "✓ ";
+  color: var(--color-secondary);
+  font-weight: bold;
+}
+
+.price-note {
+  margin-top: 20px;
+  font-size: 0.85rem;
+  color: #888;
+}
+
 /* Contact & Buttons */
 .section-contact {
   text-align: center;
