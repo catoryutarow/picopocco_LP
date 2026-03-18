@@ -14,26 +14,39 @@
     }
   }
 
-  // Wait for images only (not videos), then dismiss
+  // Wait for images + videos, then dismiss
   document.addEventListener('DOMContentLoaded', () => {
-    const images = Array.from(document.images)
-    if (images.length === 0) {
-      dismissLoading()
-      return
-    }
-    let loaded = 0
-    const check = () => { if (++loaded >= images.length) dismissLoading() }
-    images.forEach(img => {
-      if (img.complete) { check() }
-      else {
-        img.addEventListener('load', check)
-        img.addEventListener('error', check)
+    const promises = []
+
+    // Images
+    Array.from(document.images).forEach(img => {
+      if (!img.complete) {
+        promises.push(new Promise(r => {
+          img.addEventListener('load', r)
+          img.addEventListener('error', r)
+        }))
       }
     })
+
+    // Videos — wait for enough data to start playback
+    document.querySelectorAll('video').forEach(video => {
+      if (video.readyState < 3) {
+        promises.push(new Promise(r => {
+          video.addEventListener('canplay', r, { once: true })
+          video.addEventListener('error', r, { once: true })
+        }))
+      }
+    })
+
+    if (promises.length === 0) {
+      dismissLoading()
+    } else {
+      Promise.all(promises).then(dismissLoading)
+    }
   })
 
-  // Fallback: dismiss after 5 seconds no matter what
-  setTimeout(dismissLoading, 5000)
+  // Fallback: dismiss after 15 seconds no matter what
+  setTimeout(dismissLoading, 15000)
 })()
 
 // Mobile Menu Toggle
