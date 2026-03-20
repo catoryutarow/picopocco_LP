@@ -5,8 +5,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ブログ | ピコポッコ Official Website</title>
-    <!-- Google Fonts for rounded feel -->
+    <title>お客様の声 | ピコポッコ Official Website</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&family=Nunito:wght@700&display=swap" rel="stylesheet">
@@ -58,7 +57,7 @@
                     <li><a href="index.html#price">料金</a></li>
                     <li><a href="blog.html">ブログ</a></li>
                     <li><a href="testimonials.html">お客様の声</a></li>
-                    <li><a href="index.html#contact">お問い合わせ</a></li>
+                    <li><a href="https://formbase.jp/motechoro/contact-form" target="_blank" rel="noopener noreferrer">お問い合わせ</a></li>
                 </ul>
             </nav>
         </div>
@@ -67,17 +66,16 @@
     <main>
         <section class="page-header">
             <div class="container">
-                <h2 class="section-title">ブログ</h2>
+                <h2 class="section-title">お客様の声</h2>
             </div>
         </section>
 
-        <section class="section-blog-list">
+        <section class="section-testimonials-list">
             <div class="container section-container">
-                <div id="category-filter" class="category-filter"></div>
-                <div id="blog-container" class="blog-grid"></div>
-                <p id="no-posts-msg" style="text-align:center;color:#888;display:none;">まだ記事がありません。</p>
+                <div id="testimonials-container" class="testimonials-grid"></div>
+                <p id="no-testimonials-msg" style="text-align:center;color:#888;display:none;">まだお客様の声がありません。</p>
                 <div class="pagination">
-                    <button id="load-more-btn" class="btn btn-primary" style="display:none;">もっと読む</button>
+                    <button id="load-more-btn" class="btn btn-primary" style="display:none;">もっと見る</button>
                 </div>
             </div>
         </section>
@@ -97,7 +95,7 @@
     </footer>
 
     <script type="module" src="./src/main.js"></script>
-    <script type="module" src="./src/blog.js"></script>
+    <script type="module" src="./src/testimonials.js"></script>
 </body>
 
 </html>

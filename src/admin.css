@@ -302,6 +302,45 @@
   color: var(--color-secondary);
 }
 
+/* Admin Tabs */
+.admin-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 25px;
+  border-bottom: 2px solid #eee;
+}
+
+.admin-tab {
+  padding: 12px 24px;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  font-family: var(--font-main);
+  font-size: 1rem;
+  font-weight: bold;
+  color: #888;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: -2px;
+}
+
+.admin-tab:hover {
+  color: var(--color-text);
+}
+
+.admin-tab.active {
+  color: var(--color-secondary);
+  border-bottom-color: var(--color-secondary);
+}
+
+.admin-tab-content {
+  display: none;
+}
+
+.admin-tab-content.active {
+  display: block;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .login-card {

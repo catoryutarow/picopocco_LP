@@ -15,11 +15,15 @@ import DOMPurify from 'dompurify'
 let currentPostId = null
 let quillEditor = null
 let autoSaveTimer = null
+let currentTestimonialId = null
+let testimonialAutoSaveTimer = null
+let currentTestimonialThumbnailUrl = null
 
 // ===== DOM Elements =====
 const loginView = document.getElementById('login-view')
 const dashboardView = document.getElementById('dashboard-view')
 const editorView = document.getElementById('editor-view')
+const testimonialEditorView = document.getElementById('testimonial-editor-view')
 
 // ===== Auth =====
 onAuthStateChanged(auth, (user) => {
@@ -27,6 +31,7 @@ onAuthStateChanged(auth, (user) => {
     showView('dashboard')
     document.getElementById('user-email').textContent = user.email
     loadPostsList()
+    loadTestimonialsList()
   } else {
     showView('login')
   }
@@ -55,9 +60,13 @@ function showView(view) {
   loginView.style.display = view === 'login' ? 'block' : 'none'
   dashboardView.style.display = view === 'dashboard' ? 'block' : 'none'
   editorView.style.display = view === 'editor' ? 'block' : 'none'
+  testimonialEditorView.style.display = view === 'testimonial-editor' ? 'block' : 'none'
 
   if (view !== 'editor') {
     stopAutoSave()
+  }
+  if (view !== 'testimonial-editor') {
+    stopTestimonialAutoSave()
   }
 }
 
@@ -406,6 +415,275 @@ document.getElementById('delete-post-btn').addEventListener('click', async () =>
     alert('記事を削除しました。')
     showView('dashboard')
     loadPostsList()
+  } catch (err) {
+    console.error('削除に失敗:', err)
+    alert('削除に失敗しました。')
+  }
+})
+
+// ===== Admin Tabs =====
+document.querySelectorAll('.admin-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'))
+    document.querySelectorAll('.admin-tab-content').forEach(c => {
+      c.classList.remove('active')
+      c.style.display = 'none'
+    })
+    tab.classList.add('active')
+    const target = document.getElementById(`tab-${tab.dataset.tab}`)
+    target.classList.add('active')
+    target.style.display = 'block'
+  })
+})
+
+// ===== Testimonials List =====
+async function loadTestimonialsList() {
+  const tbody = document.getElementById('testimonials-tbody')
+  const noMsg = document.getElementById('no-testimonials-admin')
+  tbody.textContent = ''
+
+  try {
+    const q = query(collection(db, 'testimonials'), orderBy('createdAt', 'desc'))
+    const snapshot = await getDocs(q)
+
+    if (snapshot.empty) {
+      noMsg.style.display = 'block'
+      return
+    }
+    noMsg.style.display = 'none'
+
+    snapshot.forEach(docSnap => {
+      const item = docSnap.data()
+      const tr = document.createElement('tr')
+
+      // Thumbnail
+      const thumbTd = document.createElement('td')
+      thumbTd.className = 'thumb-cell'
+      if (item.thumbnailUrl) {
+        const img = document.createElement('img')
+        img.src = item.thumbnailUrl
+        img.alt = ''
+        thumbTd.appendChild(img)
+      } else {
+        const placeholder = document.createElement('div')
+        placeholder.className = 'thumb-placeholder'
+        thumbTd.appendChild(placeholder)
+      }
+      tr.appendChild(thumbTd)
+
+      // Name
+      const nameTd = document.createElement('td')
+      nameTd.className = 'post-title-cell'
+      nameTd.textContent = item.name || '(無名)'
+      nameTd.addEventListener('click', () => openTestimonialEditor(docSnap.id))
+      tr.appendChild(nameTd)
+
+      // Organization
+      const orgTd = document.createElement('td')
+      orgTd.textContent = item.organization || '-'
+      tr.appendChild(orgTd)
+
+      // Date
+      const dateTd = document.createElement('td')
+      dateTd.textContent = formatDate(item.createdAt)
+      tr.appendChild(dateTd)
+
+      // Status
+      const statusTd = document.createElement('td')
+      const badge = document.createElement('span')
+      badge.className = `status-badge status-${item.status || 'draft'}`
+      badge.textContent = item.status === 'published' ? '公開' : '下書き'
+      statusTd.appendChild(badge)
+      tr.appendChild(statusTd)
+
+      // Actions
+      const actionTd = document.createElement('td')
+      const editBtn = document.createElement('button')
+      editBtn.className = 'btn-edit'
+      editBtn.textContent = '編集'
+      editBtn.addEventListener('click', () => openTestimonialEditor(docSnap.id))
+      actionTd.appendChild(editBtn)
+      tr.appendChild(actionTd)
+
+      tbody.appendChild(tr)
+    })
+  } catch (err) {
+    console.error('お客様の声一覧の取得に失敗:', err)
+  }
+}
+
+// ===== Testimonial Editor =====
+document.getElementById('new-testimonial-btn').addEventListener('click', () => openTestimonialEditor(null))
+document.getElementById('back-to-testimonials-list').addEventListener('click', () => {
+  showView('dashboard')
+  loadTestimonialsList()
+})
+
+const testimonialThumbPreview = document.getElementById('testimonial-thumbnail-preview')
+const testimonialThumbInput = document.getElementById('testimonial-thumbnail-input')
+
+testimonialThumbPreview.addEventListener('click', () => testimonialThumbInput.click())
+
+testimonialThumbInput.addEventListener('change', async (e) => {
+  const file = e.target.files[0]
+  if (!file) return
+
+  try {
+    const resized = await resizeImage(file, 800)
+    const id = currentTestimonialId || 'temp_' + Date.now()
+    const filename = `thumb_${Date.now()}_${file.name}`
+    const storageRef = ref(storage, `testimonial-images/${id}/${filename}`)
+    await uploadBytes(storageRef, resized)
+    currentTestimonialThumbnailUrl = await getDownloadURL(storageRef)
+    showTestimonialThumbnailPreview(currentTestimonialThumbnailUrl)
+  } catch (err) {
+    console.error('画像アップロード失敗:', err)
+    alert('画像のアップロードに失敗しました。')
+  }
+})
+
+function showTestimonialThumbnailPreview(url) {
+  currentTestimonialThumbnailUrl = url
+  testimonialThumbPreview.textContent = ''
+  const img = document.createElement('img')
+  img.src = url
+  img.alt = '写真'
+  testimonialThumbPreview.appendChild(img)
+}
+
+function resetTestimonialThumbnailPreview() {
+  currentTestimonialThumbnailUrl = null
+  testimonialThumbPreview.textContent = ''
+  const span = document.createElement('span')
+  span.textContent = 'クリックして画像を選択'
+  testimonialThumbPreview.appendChild(span)
+  testimonialThumbInput.value = ''
+}
+
+async function openTestimonialEditor(testimonialId) {
+  currentTestimonialId = testimonialId
+  showView('testimonial-editor')
+
+  // Reset form
+  document.getElementById('testimonial-name').value = ''
+  document.getElementById('testimonial-organization').value = ''
+  document.getElementById('testimonial-status').value = 'draft'
+  document.getElementById('testimonial-content').value = ''
+  resetTestimonialThumbnailPreview()
+  document.getElementById('delete-testimonial-btn').style.display = testimonialId ? 'inline-block' : 'none'
+
+  if (testimonialId) {
+    try {
+      const docSnap = await getDoc(doc(db, 'testimonials', testimonialId))
+      if (docSnap.exists()) {
+        const item = docSnap.data()
+        document.getElementById('testimonial-name').value = item.name || ''
+        document.getElementById('testimonial-organization').value = item.organization || ''
+        document.getElementById('testimonial-status').value = item.status || 'draft'
+        document.getElementById('testimonial-content').value = item.content || ''
+
+        if (item.thumbnailUrl) {
+          showTestimonialThumbnailPreview(item.thumbnailUrl)
+        }
+      }
+    } catch (err) {
+      console.error('お客様の声の読み込みに失敗:', err)
+    }
+  }
+
+  startTestimonialAutoSave()
+}
+
+// ===== Testimonial Save =====
+document.getElementById('save-testimonial-btn').addEventListener('click', () => saveTestimonial(false))
+
+async function saveTestimonial(isAutoSave = false) {
+  const name = document.getElementById('testimonial-name').value.trim()
+  const organization = document.getElementById('testimonial-organization').value.trim()
+  const status = document.getElementById('testimonial-status').value
+  const content = document.getElementById('testimonial-content').value.trim()
+
+  if (!name && !isAutoSave) {
+    alert('お名前を入力してください。')
+    return
+  }
+  if (!name && isAutoSave) return
+
+  const statusEl = document.getElementById('testimonial-autosave-status')
+
+  const data = {
+    name,
+    organization,
+    status,
+    content,
+    thumbnailUrl: currentTestimonialThumbnailUrl || null,
+    author: auth.currentUser?.email || '',
+    updatedAt: serverTimestamp(),
+  }
+
+  try {
+    if (isAutoSave) {
+      statusEl.textContent = '保存中...'
+      statusEl.className = 'autosave-status saving'
+    }
+
+    if (currentTestimonialId) {
+      if (status === 'published') {
+        const existingDoc = await getDoc(doc(db, 'testimonials', currentTestimonialId))
+        if (existingDoc.exists() && !existingDoc.data().publishedAt) {
+          data.publishedAt = serverTimestamp()
+        }
+      }
+      await updateDoc(doc(db, 'testimonials', currentTestimonialId), data)
+    } else {
+      data.createdAt = serverTimestamp()
+      if (status === 'published') {
+        data.publishedAt = serverTimestamp()
+      }
+      const docRef = await addDoc(collection(db, 'testimonials'), data)
+      currentTestimonialId = docRef.id
+      document.getElementById('delete-testimonial-btn').style.display = 'inline-block'
+    }
+
+    if (isAutoSave) {
+      statusEl.textContent = '自動保存しました'
+      statusEl.className = 'autosave-status saved'
+    } else {
+      alert('保存しました！')
+    }
+  } catch (err) {
+    console.error('保存に失敗:', err)
+    if (!isAutoSave) {
+      alert('保存に失敗しました。')
+    }
+    statusEl.textContent = '保存に失敗'
+    statusEl.className = 'autosave-status'
+  }
+}
+
+// ===== Testimonial Auto Save =====
+function startTestimonialAutoSave() {
+  stopTestimonialAutoSave()
+  testimonialAutoSaveTimer = setInterval(() => saveTestimonial(true), 30000)
+}
+
+function stopTestimonialAutoSave() {
+  if (testimonialAutoSaveTimer) {
+    clearInterval(testimonialAutoSaveTimer)
+    testimonialAutoSaveTimer = null
+  }
+}
+
+// ===== Testimonial Delete =====
+document.getElementById('delete-testimonial-btn').addEventListener('click', async () => {
+  if (!currentTestimonialId) return
+  if (!confirm('このお客様の声を削除しますか？この操作は取り消せません。')) return
+
+  try {
+    await deleteDoc(doc(db, 'testimonials', currentTestimonialId))
+    alert('お客様の声を削除しました。')
+    showView('dashboard')
+    loadTestimonialsList()
   } catch (err) {
     console.error('削除に失敗:', err)
     alert('削除に失敗しました。')

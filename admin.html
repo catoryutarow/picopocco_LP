@@ -45,26 +45,59 @@
             </div>
         </header>
         <main class="admin-main">
-            <div class="admin-toolbar">
-                <h2>記事一覧</h2>
-                <button id="new-post-btn" class="btn btn-primary">新しい記事を書く</button>
+            <!-- Admin Tabs -->
+            <div class="admin-tabs">
+                <button class="admin-tab active" data-tab="posts">記事管理</button>
+                <button class="admin-tab" data-tab="testimonials">お客様の声管理</button>
             </div>
-            <div id="posts-table-container">
-                <table class="posts-table">
-                    <thead>
-                        <tr>
-                            <th style="width:60px;"></th>
-                            <th>タイトル</th>
-                            <th style="width:100px;">カテゴリ</th>
-                            <th style="width:110px;">日付</th>
-                            <th style="width:80px;">状態</th>
-                            <th style="width:80px;">操作</th>
-                        </tr>
-                    </thead>
-                    <tbody id="posts-tbody"></tbody>
-                </table>
+
+            <!-- Posts Tab -->
+            <div id="tab-posts" class="admin-tab-content active">
+                <div class="admin-toolbar">
+                    <h2>記事一覧</h2>
+                    <button id="new-post-btn" class="btn btn-primary">新しい記事を書く</button>
+                </div>
+                <div id="posts-table-container">
+                    <table class="posts-table">
+                        <thead>
+                            <tr>
+                                <th style="width:60px;"></th>
+                                <th>タイトル</th>
+                                <th style="width:100px;">カテゴリ</th>
+                                <th style="width:110px;">日付</th>
+                                <th style="width:80px;">状態</th>
+                                <th style="width:80px;">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="posts-tbody"></tbody>
+                    </table>
+                </div>
+                <p id="no-posts-admin" style="text-align:center;color:#888;display:none;">記事がありません。「新しい記事を書く」から作成してください。</p>
             </div>
-            <p id="no-posts-admin" style="text-align:center;color:#888;display:none;">記事がありません。「新しい記事を書く」から作成してください。</p>
+
+            <!-- Testimonials Tab -->
+            <div id="tab-testimonials" class="admin-tab-content" style="display:none;">
+                <div class="admin-toolbar">
+                    <h2>お客様の声一覧</h2>
+                    <button id="new-testimonial-btn" class="btn btn-primary">新しいお客様の声を追加</button>
+                </div>
+                <div id="testimonials-table-container">
+                    <table class="posts-table">
+                        <thead>
+                            <tr>
+                                <th style="width:60px;"></th>
+                                <th>お名前</th>
+                                <th>所属・団体名</th>
+                                <th style="width:110px;">日付</th>
+                                <th style="width:80px;">状態</th>
+                                <th style="width:80px;">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="testimonials-tbody"></tbody>
+                    </table>
+                </div>
+                <p id="no-testimonials-admin" style="text-align:center;color:#888;display:none;">お客様の声がありません。「新しいお客様の声を追加」から作成してください。</p>
+            </div>
         </main>
     </div>
 
@@ -121,6 +154,52 @@
                 <div class="editor-actions">
                     <button id="save-post-btn" class="btn btn-primary">保存する</button>
                     <button id="delete-post-btn" class="btn btn-danger" style="display:none;">削除する</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ===== Testimonial Editor View ===== -->
+    <div id="testimonial-editor-view" class="admin-view" style="display:none;">
+        <header class="admin-header">
+            <button id="back-to-testimonials-list" class="btn btn-small">← お客様の声一覧へ</button>
+            <div class="admin-header-actions">
+                <span id="testimonial-autosave-status" class="autosave-status"></span>
+            </div>
+        </header>
+        <main class="admin-main editor-main">
+            <div class="editor-form">
+                <div class="form-group">
+                    <label for="testimonial-name">お名前</label>
+                    <input type="text" id="testimonial-name" placeholder="例：山田太郎 様" />
+                </div>
+                <div class="form-group">
+                    <label for="testimonial-organization">所属・団体名（任意）</label>
+                    <input type="text" id="testimonial-organization" placeholder="例：〇〇保育園" />
+                </div>
+                <div class="form-group">
+                    <label for="testimonial-status">状態</label>
+                    <select id="testimonial-status">
+                        <option value="draft">下書き</option>
+                        <option value="published">公開</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>写真（任意）</label>
+                    <div class="thumbnail-upload">
+                        <div id="testimonial-thumbnail-preview" class="thumbnail-preview">
+                            <span>クリックして画像を選択</span>
+                        </div>
+                        <input type="file" id="testimonial-thumbnail-input" accept="image/*" style="display:none;" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="testimonial-content">お客様の声</label>
+                    <textarea id="testimonial-content" rows="6" placeholder="お客様からいただいた声を入力..."></textarea>
+                </div>
+                <div class="editor-actions">
+                    <button id="save-testimonial-btn" class="btn btn-primary">保存する</button>
+                    <button id="delete-testimonial-btn" class="btn btn-danger" style="display:none;">削除する</button>
                 </div>
             </div>
         </main>
