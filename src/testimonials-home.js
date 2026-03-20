@@ -37,7 +37,7 @@ async function loadTestimonialsHome() {
         imgWrap.className = 'testimonial-card-home__image'
         const img = document.createElement('img')
         img.src = item.thumbnailUrl
-        img.alt = item.name || ''
+        img.alt = ''
         imgWrap.appendChild(img)
         card.appendChild(imgWrap)
       }
@@ -50,11 +50,21 @@ async function loadTestimonialsHome() {
       const footer = document.createElement('div')
       footer.className = 'testimonial-card-home__footer'
 
-      const nameEl = document.createElement('span')
-      nameEl.className = 'testimonial-card-home__name'
-      nameEl.textContent = item.name || ''
-      footer.appendChild(nameEl)
+      // Attribute line: gender / age / region
+      const attrEl = document.createElement('span')
+      attrEl.className = 'testimonial-card-home__attr'
+      attrEl.textContent = [item.gender, item.age, item.region].filter(Boolean).join(' / ')
+      footer.appendChild(attrEl)
 
+      // Optional name
+      if (item.name) {
+        const nameEl = document.createElement('span')
+        nameEl.className = 'testimonial-card-home__name'
+        nameEl.textContent = item.name
+        footer.appendChild(nameEl)
+      }
+
+      // Optional organization
       if (item.organization) {
         const orgEl = document.createElement('span')
         orgEl.className = 'testimonial-card-home__org'

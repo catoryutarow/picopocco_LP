@@ -39,10 +39,17 @@ function createTestimonialCard(item) {
   const footer = document.createElement('div')
   footer.className = 'testimonial-footer'
 
-  const nameEl = document.createElement('span')
-  nameEl.className = 'testimonial-name'
-  nameEl.textContent = item.name || ''
-  footer.appendChild(nameEl)
+  const attrEl = document.createElement('span')
+  attrEl.className = 'testimonial-attr'
+  attrEl.textContent = [item.gender, item.age, item.region].filter(Boolean).join(' / ')
+  footer.appendChild(attrEl)
+
+  if (item.name) {
+    const nameEl = document.createElement('span')
+    nameEl.className = 'testimonial-name'
+    nameEl.textContent = item.name
+    footer.appendChild(nameEl)
+  }
 
   if (item.organization) {
     const orgEl = document.createElement('span')

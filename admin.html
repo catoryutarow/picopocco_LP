@@ -86,8 +86,8 @@
                         <thead>
                             <tr>
                                 <th style="width:60px;"></th>
+                                <th>属性</th>
                                 <th>お名前</th>
-                                <th>所属・団体名</th>
                                 <th style="width:110px;">日付</th>
                                 <th style="width:80px;">状態</th>
                                 <th style="width:80px;">操作</th>
@@ -169,13 +169,43 @@
         </header>
         <main class="admin-main editor-main">
             <div class="editor-form">
-                <div class="form-group">
-                    <label for="testimonial-name">お名前</label>
-                    <input type="text" id="testimonial-name" placeholder="例：山田太郎 様" />
+                <p style="font-size:0.85rem;color:#888;margin-bottom:20px;">※ 性別・年齢・地域は必須です。その他は任意です。</p>
+                <div class="form-row">
+                    <div class="form-group" style="flex:1;">
+                        <label for="testimonial-gender">性別 <span style="color:#e74c3c;">*</span></label>
+                        <select id="testimonial-gender" required>
+                            <option value="">選択してください</option>
+                            <option value="女性">女性</option>
+                            <option value="男性">男性</option>
+                            <option value="その他">その他</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label for="testimonial-age">年齢 <span style="color:#e74c3c;">*</span></label>
+                        <select id="testimonial-age" required>
+                            <option value="">選択してください</option>
+                            <option value="10代">10代</option>
+                            <option value="20代">20代</option>
+                            <option value="30代">30代</option>
+                            <option value="40代">40代</option>
+                            <option value="50代">50代</option>
+                            <option value="60代以上">60代以上</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label for="testimonial-region">地域 <span style="color:#e74c3c;">*</span></label>
+                        <input type="text" id="testimonial-region" placeholder="例：東京都" required />
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="testimonial-organization">所属・団体名（任意）</label>
-                    <input type="text" id="testimonial-organization" placeholder="例：〇〇保育園" />
+                <div class="form-row">
+                    <div class="form-group" style="flex:1;">
+                        <label for="testimonial-name">お名前（任意）</label>
+                        <input type="text" id="testimonial-name" placeholder="例：山田太郎 様" />
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label for="testimonial-organization">所属・団体名（任意）</label>
+                        <input type="text" id="testimonial-organization" placeholder="例：〇〇保育園" />
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="testimonial-status">状態</label>
@@ -194,7 +224,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="testimonial-content">お客様の声</label>
+                    <label for="testimonial-content">お客様の声 <span style="color:#e74c3c;">*</span></label>
                     <textarea id="testimonial-content" rows="6" placeholder="お客様からいただいた声を入力..."></textarea>
                 </div>
                 <div class="editor-actions">

@@ -471,17 +471,17 @@ async function loadTestimonialsList() {
       }
       tr.appendChild(thumbTd)
 
+      // Attributes
+      const attrTd = document.createElement('td')
+      attrTd.className = 'post-title-cell'
+      attrTd.textContent = [item.gender, item.age, item.region].filter(Boolean).join(' / ') || '-'
+      attrTd.addEventListener('click', () => openTestimonialEditor(docSnap.id))
+      tr.appendChild(attrTd)
+
       // Name
       const nameTd = document.createElement('td')
-      nameTd.className = 'post-title-cell'
-      nameTd.textContent = item.name || '(無名)'
-      nameTd.addEventListener('click', () => openTestimonialEditor(docSnap.id))
+      nameTd.textContent = item.name || '-'
       tr.appendChild(nameTd)
-
-      // Organization
-      const orgTd = document.createElement('td')
-      orgTd.textContent = item.organization || '-'
-      tr.appendChild(orgTd)
 
       // Date
       const dateTd = document.createElement('td')
@@ -565,6 +565,9 @@ async function openTestimonialEditor(testimonialId) {
   showView('testimonial-editor')
 
   // Reset form
+  document.getElementById('testimonial-gender').value = ''
+  document.getElementById('testimonial-age').value = ''
+  document.getElementById('testimonial-region').value = ''
   document.getElementById('testimonial-name').value = ''
   document.getElementById('testimonial-organization').value = ''
   document.getElementById('testimonial-status').value = 'draft'
@@ -577,6 +580,9 @@ async function openTestimonialEditor(testimonialId) {
       const docSnap = await getDoc(doc(db, 'testimonials', testimonialId))
       if (docSnap.exists()) {
         const item = docSnap.data()
+        document.getElementById('testimonial-gender').value = item.gender || ''
+        document.getElementById('testimonial-age').value = item.age || ''
+        document.getElementById('testimonial-region').value = item.region || ''
         document.getElementById('testimonial-name').value = item.name || ''
         document.getElementById('testimonial-organization').value = item.organization || ''
         document.getElementById('testimonial-status').value = item.status || 'draft'
@@ -598,20 +604,30 @@ async function openTestimonialEditor(testimonialId) {
 document.getElementById('save-testimonial-btn').addEventListener('click', () => saveTestimonial(false))
 
 async function saveTestimonial(isAutoSave = false) {
+  const gender = document.getElementById('testimonial-gender').value
+  const age = document.getElementById('testimonial-age').value
+  const region = document.getElementById('testimonial-region').value.trim()
   const name = document.getElementById('testimonial-name').value.trim()
   const organization = document.getElementById('testimonial-organization').value.trim()
   const status = document.getElementById('testimonial-status').value
   const content = document.getElementById('testimonial-content').value.trim()
 
-  if (!name && !isAutoSave) {
-    alert('お名前を入力してください。')
+  if (!isAutoSave && (!gender || !age || !region)) {
+    alert('性別・年齢・地域は必須です。')
     return
   }
-  if (!name && isAutoSave) return
+  if (!isAutoSave && !content) {
+    alert('お客様の声を入力してください。')
+    return
+  }
+  if (isAutoSave && !content) return
 
   const statusEl = document.getElementById('testimonial-autosave-status')
 
   const data = {
+    gender,
+    age,
+    region,
     name,
     organization,
     status,

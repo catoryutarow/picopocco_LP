@@ -1252,6 +1252,12 @@ section {
   padding-top: 12px;
 }
 
+.testimonial-card-home__attr {
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: var(--color-secondary);
+}
+
 .testimonial-card-home__name {
   font-weight: bold;
   color: var(--color-accent-blue);
@@ -1337,6 +1343,12 @@ section {
   gap: 2px;
   border-top: 1px dashed #eee;
   padding-top: 12px;
+}
+
+.testimonial-attr {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: var(--color-secondary);
 }
 
 .testimonial-name {
