@@ -112,7 +112,7 @@ async function loadPost() {
     const backLink = document.createElement('a')
     backLink.href = 'blog.html'
     backLink.className = 'btn btn-primary'
-    backLink.textContent = '← ブログ一覧へ戻る'
+    backLink.textContent = '← お知らせ一覧へ戻る'
     footer.appendChild(backLink)
     article.appendChild(footer)
 
